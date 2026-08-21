@@ -186,6 +186,14 @@
   }
   .loc-pill.home{background:var(--gold); color:#151510;}
   .loc-pill.away{background:none; border:1px solid var(--line); color:var(--mute);}
+  .result-pill{
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.07em;
+    text-transform:uppercase; font-weight:700; border-radius:6px; padding:5px 9px;
+    flex-shrink:0; align-self:flex-start; margin-top:6px;
+  }
+  .result-pill.w{background:#3E7D4C; color:#EAF6EC;}
+  .result-pill.l{background:var(--danger); color:#F8E9E5;}
+  .result-pill.t{background:var(--panel-2); border:1px solid var(--line); color:var(--mute);}
 
   footer.foot{
     text-align:center; padding:22px 16px 30px; font-size:10.5px; color:#5a5850;
@@ -222,7 +230,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input id="searchInput" type="text" placeholder="Search roster by name">
       </div>
-      <div class="roster-count" id="rosterCount">31 players</div>
+      <div class="roster-count" id="rosterCount">30 players</div>
       <div id="playerList"></div>
       <div class="no-results" id="noResults" style="display:none;">No player matches that search.</div>
     </section>
@@ -293,12 +301,6 @@
     "first": "Felix",
     "dob": "2012-08",
     "num": "4"
-  },
-  {
-    "last": "Farber",
-    "first": "Elliott",
-    "dob": "2013-03",
-    "num": null
   },
   {
     "last": "Harper",
@@ -450,7 +452,8 @@
     "loc": "home",
     "tag": null,
     "addr": "2100 Arlington Avenue, Columbus, OH 43221",
-    "time": "5:30p"
+    "time": "5:30p",
+    "result": {"outcome": "W", "score": "12-0"}
   },
   {
     "date": "2026-08-27",
@@ -564,7 +567,10 @@
             <span>${g.addr}</span>
           </a>
         </div>
-        <span class="loc-pill ${g.loc}">${g.loc}</span>
+        <div style="display:flex; flex-direction:column; align-items:flex-end;">
+          <span class="loc-pill ${g.loc}">${g.loc}</span>
+          ${g.result ? `<span class="result-pill ${g.result.outcome.toLowerCase()}">${g.result.outcome} ${g.result.score}</span>` : ''}
+        </div>
       `;
       gameListEl.appendChild(card);
     });
