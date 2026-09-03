@@ -194,6 +194,18 @@
   .result-pill.w{background:#3E7D4C; color:#EAF6EC;}
   .result-pill.l{background:var(--danger); color:#F8E9E5;}
   .result-pill.t{background:var(--panel-2); border:1px solid var(--line); color:var(--mute);}
+  .game-card.canceled{opacity:0.6;}
+  .game-card.canceled .game-opp{text-decoration:line-through; text-decoration-color:var(--danger);}
+  .cancel-pill{
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.07em;
+    text-transform:uppercase; font-weight:700; border-radius:6px; padding:5px 9px;
+    flex-shrink:0; align-self:flex-start; margin-top:6px;
+    background:none; border:1px solid var(--danger); color:var(--danger);
+  }
+  .cancel-note{
+    font-family:'Work Sans', sans-serif; font-size:11.5px; color:var(--danger);
+    margin-top:5px; font-style:italic;
+  }
 
   footer.foot{
     text-align:center; padding:22px 16px 30px; font-size:10.5px; color:#5a5850;
@@ -470,7 +482,9 @@
     "loc": "away",
     "tag": null,
     "addr": "215 Norton Road, Columbus, OH 43228-1799",
-    "time": "5:30p"
+    "time": "5:30p",
+    "canceled": true,
+    "cancelReason": "Canceled \u2014 too hot to play"
   },
   {
     "date": "2026-09-10",
@@ -554,7 +568,9 @@
       const dt = new Date(y, m-1, d);
       const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(g.addr);
       const card = document.createElement('div');
-      card.className = 'game-card' + (g.tag && g.tag.toLowerCase().includes('scrimmage') ? ' scrimmage' : '');
+      card.className = 'game-card'
+        + (g.tag && g.tag.toLowerCase().includes('scrimmage') ? ' scrimmage' : '')
+        + (g.canceled ? ' canceled' : '');
       card.innerHTML = `
         <div class="date-slot">
           <span class="dow">${dows[dt.getDay()]}</span>
@@ -567,9 +583,11 @@
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <span>${g.addr}</span>
           </a>
+          ${g.canceled ? `<div class="cancel-note">${g.cancelReason || 'Canceled'}</div>` : ''}
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end;">
           <span class="loc-pill ${g.loc}">${g.loc}</span>
+          ${g.canceled ? `<span class="cancel-pill">Canceled</span>` : ''}
           ${g.result ? `<span class="result-pill ${g.result.outcome.toLowerCase()}">${g.result.outcome} ${g.result.score}</span>` : ''}
         </div>
       `;
