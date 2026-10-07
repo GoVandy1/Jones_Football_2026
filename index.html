@@ -72,6 +72,18 @@
     font-size:12px; color:var(--mute); margin-top:3px;
     font-family:'Work Sans', sans-serif;
   }
+  .champ-banner{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    margin-top:14px; padding:9px 12px; border-radius:8px;
+    background:linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 100%);
+    position:relative; z-index:1;
+    box-shadow:0 2px 8px rgba(198,162,39,0.25);
+  }
+  .champ-banner svg{flex-shrink:0;}
+  .champ-banner span{
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:11.5px;
+    letter-spacing:0.09em; text-transform:uppercase; color:#1A1508;
+  }
 
   /* ---------- TABS ---------- */
   nav.tabs{
@@ -226,6 +238,10 @@
         <h1 class="team-name">Jones Football</h1>
         <span class="sub-line">8th Grade &middot; 2026 Season</span>
       </div>
+    </div>
+    <div class="champ-banner">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1508" stroke-width="2.2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a2 2 0 0 0 0 4h1M17 5h3a2 2 0 0 1 0 4h-1"/></svg>
+      <span>OCC Champions &middot; Undefeated 7&ndash;0</span>
     </div>
   </header>
 
@@ -518,7 +534,8 @@
     "loc": "away",
     "tag": "Rescheduled",
     "addr": "215 Norton Road, Columbus, OH 43228-1799",
-    "time": "5:30p"
+    "time": "5:30p",
+    "result": {"outcome": "W", "score": "55-0"}
   }
 ];
 
